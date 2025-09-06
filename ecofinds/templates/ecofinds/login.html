@@ -1,26 +1,184 @@
-<div style="width: 800px; height: 550px; position: relative; background: white; overflow: hidden">
-  <img style="width: 824.90px; height: 550px; left: -12px; top: 0px; position: absolute" src="https://placehold.co/825x550" />
-  
-  <!-- Login Card -->
-  <div style="width: 412px; height: 430px; left: 51px; top: 54px; position: absolute; background: white; border-radius: 8px; box-shadow: 0px 4px 12px rgba(0,0,0,0.2); padding: 20px;">
-    
-    <!-- Title -->
-    <div style="text-align: center; color: black; font-size: 36px; font-family: Inknut Antiqua; font-weight: 700; margin-bottom: 30px;">
-      Log In
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Simple transition for page visibility */
+        .page {
+            transition: opacity 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen" style="background-image: url('https://source.unsplash.com/random/1920x1080/?professional,office'); background-size: cover; background-position: center;">
+
+    <div class="container w-full max-w-md p-8 space-y-6">
+        <!-- Log In Page -->
+        <div id="login-page" class="page bg-white p-8 rounded-2xl shadow-lg bg-opacity-90 backdrop-blur-sm">
+            <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Log In</h1>
+            <form id="login-form" class="space-y-6">
+                <div>
+                    <label for="login-username" class="sr-only">Username</label>
+                    <input type="text" id="login-username" placeholder="Enter username" class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200" required>
+                </div>
+                <div>
+                    <label for="login-password" class="sr-only">Password</label>
+                    <input type="password" id="login-password" placeholder="Enter password" class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200" required>
+                </div>
+                <a type="submit" class="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    Proceed
+                </a><a href="base2.html"></a>
+            </form>
+            <div class="mt-6 text-center">
+                <button id="show-signup-btn" class="w-full bg-gray-200 text-gray-700 font-semibold py-3 rounded-lg hover:bg-gray-300 transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400">
+                    Sign Up
+                </button>
+            </div>
+        </div>
+
+        <!-- Sign Up Page -->
+        <div id="signup-page" class="page bg-white p-8 rounded-2xl shadow-lg hidden bg-opacity-90 backdrop-blur-sm">
+             <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Sign Up</h1>
+            <form id="signup-form" class="space-y-6">
+                <div>
+                    <label for="signup-username" class="sr-only">Username</label>
+                    <input type="text" id="signup-username" placeholder="Enter username" class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-200" required>
+                </div>
+                <div>
+                    <label for="signup-password" class="sr-only">Password</label>
+                    <input type="password" id="signup-password" placeholder="Enter password" class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-200" required>
+                </div>
+                <a type="submit" class="w-full bg-green-600 text-white font-semibold py-3 rounded-lg hover:bg-green-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                    Proceed
+                <a href="base2.html"></a>
+            </form>
+            <div class="mt-6 text-center">
+                <button id="show-login-btn" class="w-full bg-gray-200 text-gray-700 font-semibold py-3 rounded-lg hover:bg-gray-300 transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400">
+                    Back to Log In
+                </button>
+            </div>
+        </div>
+        
+        <!-- Message Box for feedback -->
+        <div id="message-box" class="fixed bottom-5 right-5 bg-gray-800 text-white p-4 rounded-lg shadow-xl opacity-0 transition-opacity duration-500"></div>
     </div>
-    
-    <!-- Username -->
-    <label style="font-size: 18px; font-family: Inknut Antiqua; display: block; margin-bottom: 5px;">Enter Username</label>
-    <input type="text" placeholder="Username" style="width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #ccc; margin-bottom: 20px; background: rgba(200,146,146,0.2);">
-    
-    <!-- Password -->
-    <label style="font-size: 18px; font-family: Inknut Antiqua; display: block; margin-bottom: 5px;">Enter Password</label>
-    <input type="password" placeholder="Password" style="width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #ccc; margin-bottom: 25px; background: rgba(200,146,146,0.2);">
-    
-    <!-- Buttons -->
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-      <a href="signup.html" style="color: #0047FF; font-family: Inknut Antiqua; text-decoration: none; font-size: 14px;">Sign Up</a>
-      <a href="base2.html" style="background: #403A3C; color: white; border: none; border-radius: 10px; padding: 10px 20px; font-family: Inknut Antiqua; cursor: pointer;">Proceed</a>
-    </div>
-  </div>
-</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginPage = document.getElementById('login-page');
+            const signupPage = document.getElementById('signup-page');
+            const showSignupBtn = document.getElementById('show-signup-btn');
+            const showLoginBtn = document.getElementById('show-login-btn');
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+            const messageBox = document.getElementById('message-box');
+
+            // --- Page Switching Logic ---
+            showSignupBtn.addEventListener('click', () => {
+                loginPage.classList.add('hidden');
+                signupPage.classList.remove('hidden');
+            });
+
+            showLoginBtn.addEventListener('click', () => {
+                signupPage.classList.add('hidden');
+                loginPage.classList.remove('hidden');
+            });
+
+            // --- Function to show messages ---
+            function showMessage(message, isError = false) {
+                messageBox.textContent = message;
+                messageBox.style.backgroundColor = isError ? '#ef4444' : '#22c55e'; // red for error, green for success
+                messageBox.classList.remove('opacity-0');
+                
+                setTimeout(() => {
+                    messageBox.classList.add('opacity-0');
+                }, 3000); // Hide after 3 seconds
+            }
+
+            // --- Backend Integration Placeholder ---
+            // This is where you will connect to your Python backend (e.g., Flask, Django).
+            // You will use the fetch API to send a POST request with the user's data.
+
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault(); // Prevent default form submission
+                
+                const username = document.getElementById('login-username').value;
+                const password = document.getElementById('login-password').value;
+
+                console.log('Login attempt:', { username, password });
+                showMessage('Login successful (frontend only). Check console for data.');
+
+                /* // --- EXAMPLE: PYTHON BACKEND INTEGRATION (uncomment to use) ---
+                try {
+                    const response = await fetch('/login', { // Your Python backend endpoint
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ username, password }),
+                    });
+                    
+                    const result = await response.json();
+
+                    if (response.ok) {
+                        showMessage(result.message || 'Login successful!');
+                        // Redirect or update UI on successful login
+                        // window.location.href = '/dashboard';
+                    } else {
+                        showMessage(result.error || 'Login failed.', true);
+                    }
+                } catch (error) {
+                    console.error('Login error:', error);
+                    showMessage('An error occurred. Please try again.', true);
+                }
+                */
+            });
+
+            signupForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const username = document.getElementById('signup-username').value;
+                const password = document.getElementById('signup-password').value;
+
+                console.log('Sign up attempt:', { username, password });
+                showMessage('Sign up successful (frontend only). Check console for data.');
+
+                /* // --- EXAMPLE: PYTHON BACKEND INTEGRATION (uncomment to use) ---
+                try {
+                    const response = await fetch('/signup', { // Your Python backend endpoint
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ username, password }),
+                    });
+
+                    const result = await response.json();
+
+                    if (response.ok) {
+                        showMessage(result.message || 'Sign up successful!');
+                        // Optionally switch to login page
+                        signupPage.classList.add('hidden');
+                        loginPage.classList.remove('hidden');
+                    } else {
+                        showMessage(result.error || 'Sign up failed.', true);
+                    }
+                } catch (error) {
+                    console.error('Sign up error:', error);
+                    showMessage('An error occurred. Please try again.', true);
+                }
+                */
+            });
+        });
+    </script>
+
+</body>
+</html>
+
+

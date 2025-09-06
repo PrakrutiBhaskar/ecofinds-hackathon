@@ -1,1 +1,1 @@
-default_app_config = "rethread.apps.rethreadConfig"
+default_app_config = "rethread.apps.rethread"
