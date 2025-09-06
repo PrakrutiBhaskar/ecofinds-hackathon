@@ -1,0 +1,25 @@
+{% extends "marketplace/base.html" %}
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Your Cart</h1>
+<div class="space-y-3">
+  {% for it in items %}
+    <div class="bg-white p-4 rounded shadow flex items-center justify-between">
+      <div>
+        <div class="font-semibold">{{ it.product.title }}</div>
+        <div class="text-sm text-gray-600">Qty: {{ it.quantity }}</div>
+        <div class="text-green-700 font-bold">₹ {{ it.product.price }}</div>
+      </div>
+      <a class="px-3 py-1 border rounded" href="{% url 'remove_from_cart' it.id %}">Remove</a>
+    </div>
+  {% empty %}
+    <p>Your cart is empty.</p>
+  {% endfor %}
+</div>
+
+{% if items %}
+  <div class="mt-4 p-4 bg-white rounded shadow flex justify-between items-center">
+    <div class="text-lg">Total: <span class="font-bold text-green-700">₹ {{ total }}</span></div>
+    <a class="bg-green-600 text-white px-4 py-2 rounded" href="{% url 'checkout' %}">Checkout</a>
+  </div>
+{% endif %}
+{% endblock %}

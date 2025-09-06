@@ -1,0 +1,10 @@
+{% extends "marketplace/base.html" %}
+{% block content %}
+<div class="max-w-xl mx-auto bg-white p-6 rounded shadow">
+  <h1 class="text-2xl font-bold mb-4">{{ mode }} Listing</h1>
+  <form method="post" enctype="multipart/form-data">{% csrf_token %}
+    {{ form.as_p }}
+    <button class="bg-green-600 text-white px-4 py-2 rounded">Save</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "marketplace/base.html" %}
+{% block content %}
+<div class="bg-white rounded shadow overflow-hidden">
+  {% if product.image %}
+    <img class="w-full max-h-80 object-cover" src="{{ product.image.url }}" alt="{{ product.title }}">
+  {% else %}
+    <img class="w-full max-h-80 object-cover" src="/static/img/placeholder.png" alt="placeholder">
+  {% endif %}
+  <div class="p-4 space-y-2">
+    <h1 class="text-2xl font-bold">{{ product.title }}</h1>
+    <div class="text-green-700 text-xl font-bold">₹ {{ product.price }}</div>
+    <div class="text-sm text-gray-600">Category: {{ product.get_category_display }}</div>
+    <p class="mt-2">{{ product.description|linebreaks }}</p>
+
+    <div class="flex gap-2 mt-4">
+      <a href="{% url 'add_to_cart' product.pk %}" class="bg-green-600 text-white px-4 py-2 rounded">Add to cart</a>
+      {% if user == product.seller %}
+        <a href="{% url 'product_update' product.pk %}" class="px-4 py-2 rounded border">Edit</a>
+        <form method="post" action="{% url 'product_delete' product.pk %}">
+          {% csrf_token %}
+          <button class="px-4 py-2 rounded border">Delete</button>
+        </form>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

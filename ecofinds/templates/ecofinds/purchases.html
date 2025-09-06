@@ -1,0 +1,17 @@
+{% extends "marketplace/base.html" %}
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Previous Purchases</h1>
+<div class="space-y-3">
+  {% for p in entries %}
+    <div class="bg-white p-4 rounded shadow flex items-center justify-between">
+      <div>
+        <div class="font-semibold">{{ p.product }}</div>
+        <div class="text-sm text-gray-600">Qty: {{ p.quantity }}</div>
+      </div>
+      <div class="text-sm text-gray-600">{{ p.purchased_at|date:"M d, Y H:i" }}</div>
+    </div>
+  {% empty %}
+    <p>No purchases yet.</p>
+  {% endfor %}
+</div>
+{% endblock %}
