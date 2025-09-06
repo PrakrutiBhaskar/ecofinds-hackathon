@@ -7,4 +7,4 @@ class RethreadConfig(AppConfig):
     name = 'rethread'
 
     def ready(self):
-        import rethread.signals  # 👈 this is the important line
+        from . import signals  # 👈 this is the important line
