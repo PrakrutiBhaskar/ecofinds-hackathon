@@ -10,7 +10,6 @@
         body {
             font-family: 'Inter', sans-serif;
         }
-        /* Simple transition for page visibility */
         .page {
             transition: opacity 0.3s ease-in-out;
         }
@@ -31,9 +30,13 @@
                     <label for="login-password" class="sr-only">Password</label>
                     <input type="password" id="login-password" placeholder="Enter password" class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200" required>
                 </div>
-                <a type="submit" class="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                <button type="button" onclick="window.location.href='base2.html';" class="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                     Proceed
+<<<<<<< HEAD
+                </button>
+=======
                 </a><a href="base2.html"></a>
+>>>>>>> c5c10e459b0a05e65f8252ff264459538e702a9a
             </form>
             <div class="mt-6 text-center">
                 <button id="show-signup-btn" class="w-full bg-gray-200 text-gray-700 font-semibold py-3 rounded-lg hover:bg-gray-300 transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400">
@@ -54,9 +57,15 @@
                     <label for="signup-password" class="sr-only">Password</label>
                     <input type="password" id="signup-password" placeholder="Enter password" class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-200" required>
                 </div>
+<<<<<<< HEAD
+                <button type="button" onclick="window.location.href='base2.html';" class="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    Proceed
+                </button>
+=======
                 <a type="submit" class="w-full bg-green-600 text-white font-semibold py-3 rounded-lg hover:bg-green-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                     Proceed
                 <a href="base2.html"></a>
+>>>>>>> c5c10e459b0a05e65f8252ff264459538e702a9a
             </form>
             <div class="mt-6 text-center">
                 <button id="show-login-btn" class="w-full bg-gray-200 text-gray-700 font-semibold py-3 rounded-lg hover:bg-gray-300 transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400">
@@ -78,6 +87,9 @@
             const loginForm = document.getElementById('login-form');
             const signupForm = document.getElementById('signup-form');
             const messageBox = document.getElementById('message-box');
+            
+            // The URL of your Python backend server
+            const backendUrl = 'http://127.0.0.1:5000';
 
             // --- Page Switching Logic ---
             showSignupBtn.addEventListener('click', () => {
@@ -93,7 +105,7 @@
             // --- Function to show messages ---
             function showMessage(message, isError = false) {
                 messageBox.textContent = message;
-                messageBox.style.backgroundColor = isError ? '#ef4444' : '#22c55e'; // red for error, green for success
+                messageBox.style.backgroundColor = isError ? '#ef4444' : '#22c55e'; // red-500 for error, green-500 for success
                 messageBox.classList.remove('opacity-0');
                 
                 setTimeout(() => {
@@ -101,69 +113,54 @@
                 }, 3000); // Hide after 3 seconds
             }
 
-            // --- Backend Integration Placeholder ---
-            // This is where you will connect to your Python backend (e.g., Flask, Django).
-            // You will use the fetch API to send a POST request with the user's data.
-
+            // --- Login Form Submission ---
             loginForm.addEventListener('submit', async (e) => {
-                e.preventDefault(); // Prevent default form submission
-                
+                e.preventDefault();
                 const username = document.getElementById('login-username').value;
                 const password = document.getElementById('login-password').value;
 
-                console.log('Login attempt:', { username, password });
-                showMessage('Login successful (frontend only). Check console for data.');
-
-                /* // --- EXAMPLE: PYTHON BACKEND INTEGRATION (uncomment to use) ---
                 try {
-                    const response = await fetch('/login', { // Your Python backend endpoint
+                    const response = await fetch(`${backendUrl}/login`, {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
+                        headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ username, password }),
                     });
                     
                     const result = await response.json();
 
                     if (response.ok) {
-                        showMessage(result.message || 'Login successful!');
-                        // Redirect or update UI on successful login
-                        // window.location.href = '/dashboard';
+                        showMessage('Login successful! Redirecting...');
+                        // Redirect to your next page on successful login
+                        setTimeout(() => {
+                           window.location.href = 'next_page.html'; // <<< LINK TO YOUR NEXT PAGE HERE
+                        }, 1000);
                     } else {
                         showMessage(result.error || 'Login failed.', true);
                     }
                 } catch (error) {
                     console.error('Login error:', error);
-                    showMessage('An error occurred. Please try again.', true);
+                    showMessage('Cannot connect to server. Is it running?', true);
                 }
-                */
             });
 
+            // --- Sign Up Form Submission ---
             signupForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
-                
                 const username = document.getElementById('signup-username').value;
                 const password = document.getElementById('signup-password').value;
 
-                console.log('Sign up attempt:', { username, password });
-                showMessage('Sign up successful (frontend only). Check console for data.');
-
-                /* // --- EXAMPLE: PYTHON BACKEND INTEGRATION (uncomment to use) ---
                 try {
-                    const response = await fetch('/signup', { // Your Python backend endpoint
+                    const response = await fetch(`${backendUrl}/signup`, {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
+                        headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ username, password }),
                     });
 
                     const result = await response.json();
 
                     if (response.ok) {
-                        showMessage(result.message || 'Sign up successful!');
-                        // Optionally switch to login page
+                        showMessage('Sign up successful! Please log in.');
+                        // Switch to login page after successful sign up
                         signupPage.classList.add('hidden');
                         loginPage.classList.remove('hidden');
                     } else {
@@ -171,14 +168,12 @@
                     }
                 } catch (error) {
                     console.error('Sign up error:', error);
-                    showMessage('An error occurred. Please try again.', true);
+                    showMessage('Cannot connect to server. Is it running?', true);
                 }
-                */
             });
         });
     </script>
 
 </body>
 </html>
-
 
