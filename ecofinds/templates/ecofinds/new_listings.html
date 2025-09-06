@@ -572,9 +572,8 @@
             <nav class="nav-buttons">
                 
                 
-                
+                <a href="base2.html"><button class="nav-btn" onclick="showSection('storefront')">Shop</button></a>
                 <a href="my_listings.html"><button class="nav-btn" onclick="showSection('my-listings')">My Listings</button></a>
-                <a href="new_listings.html"><button class="nav-btn" onclick="showSection('new-listings')">New Listings</button></a>
                 
                 <a href="dashboard.html"><button class="nav-btn" onclick="dashboard()">Dashboard</button></a>
                 <a href="cart.html"><button class="nav-btn" onclick="showSection('cart')">
@@ -592,15 +591,51 @@
 
   <!-- MAIN CONTENT -->
   <main class="main-content">
-    <!-- STORE SECTION (can be populated later) -->
-    <section id="storefront" class="page-section">
+
+     <section id="new-listing" class="page-section active">
       <div class="page-header">
-        <h1>Browse Treasures</h1>
-        <p>Discover amazing second-hand finds at unbeatable prices!</p>
+        <h1>Create a New Listing</h1>
+        <p>Fill in the details below to add your item for sale</p>
       </div>
-      <div class="product-grid" id="products-grid">
-        <!-- Placeholder for future product display -->
-      </div>
+
+      <form class="listing-form">
+        <div class="form-group">
+          <label for="title">Item Title</label>
+          <input type="text" id="title" name="title" placeholder="e.g. Vintage Leather Jacket" required>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" name="description" rows="4" placeholder="Describe your item..." required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select id="category" name="category" required>
+            <option value="">Select Category</option>
+            <option value="clothing">Clothing</option>
+            <option value="furniture">Furniture</option>
+            <option value="electronics">Electronics</option>
+            <option value="books">Books</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="price">Price ($)</label>
+          <input type="number" id="price" name="price" step="0.01" placeholder="Enter price" required>
+        </div>
+
+        <div class="form-group">
+          <label for="image">Upload Images</label>
+          <input type="file" id="image" name="image" accept="image/*" multiple required>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="primary-btn">Publish Listing</button>
+          <button type="reset" class="secondary-btn">Clear</button>
+        </div>
+      </form>
     </section>
 
     <!-- NEW LISTING FORM SECTION -->
@@ -782,3 +817,4 @@
 
 </body>
 </html>
+
