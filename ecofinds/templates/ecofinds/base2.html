@@ -570,72 +570,26 @@
                 <h1>Treasure <span>Finds</span></h1>
             </div>
             <nav class="nav-buttons">
-                <button class="nav-btn active" onclick="showSection('dashboard')">Dashboard</button>
-                <button class="nav-btn" onclick="showSection('storefront')">Shop</button>
-                <button class="nav-btn" onclick="showSection('my-listings')">My Listings</button>
-                <button class="nav-btn" onclick="showSection('new-listing')">New Listing</button>
-                <button class="nav-btn" onclick="showSection('cart')">
+                
+                
+                <a href="shop.html"><button class="nav-btn" onclick="showSection('storefront')">Shop</button></a>
+                <a href="my_listings.html"><button class="nav-btn" onclick="showSection('my-listings')">My Listings</button></a>
+                <a href="new-listing.html"><button class="nav-btn" onclick="showSection('new-listing')">New Listing</button></a>
+                <a href="cart.html"><button class="nav-btn" onclick="showSection('cart')">
                     Cart
                     <span class="cart-badge" id="cart-badge">0</span>
-                </button>
-                <button class="nav-btn" onclick="showSection('purchases')">Purchases</button>
-                <button class="nav-btn btn-danger" onclick="logout()">Logout</button>
+                </button></a>
+                <a href="purchases.html"><button class="nav-btn" onclick="showSection('purchases')">Purchases</button></a>
+                <a href="base.html"><button class="nav-btn btn-danger" onclick="logout()">Logout</button></a>
+                
             </nav>
         </div>
     </header>
 
     <!-- Main Content -->
     <main class="main-content">
-        <!-- Dashboard Section -->
-        <section id="dashboard" class="page-section active">
-            <div class="page-header">
-                <h1>Dashboard</h1>
-                <p>Welcome back! Here's your activity overview</p>
-            </div>
-            
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <span class="stat-number" id="active-listings-count">3</span>
-                    <span class="stat-label">Active Listings</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number" id="total-purchases-count">7</span>
-                    <span class="stat-label">Total Purchases</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number" id="total-spent">$342.50</span>
-                    <span class="stat-label">Total Spent</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number" id="cart-items-count">0</span>
-                    <span class="stat-label">Items in Cart</span>
-                </div>
-            </div>
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-                <div style="background: white; padding: 2.5rem; border-radius: 15px; box-shadow: 0 6px 20px rgba(0,0,0,0.1);">
-                    <h3 style="color: #2c3e50; margin-bottom: 1.5rem; font-size: 1.4rem;">Quick Actions</h3>
-                    <button onclick="showSection('new-listing')" class="btn btn-success">Create New Listing</button>
-                    <button onclick="showSection('storefront')" class="btn">Browse Items</button>
-                    <button onclick="showSection('cart')" class="btn btn-warning">View Cart</button>
-                </div>
-                
-                <div style="background: white; padding: 2.5rem; border-radius: 15px; box-shadow: 0 6px 20px rgba(0,0,0,0.1);">
-                    <h3 style="color: #2c3e50; margin-bottom: 1.5rem; font-size: 1.4rem;">Recent Activity</h3>
-                    <div id="recent-activity">
-                        <p style="margin-bottom: 0.8rem; color: #7f8c8d;">
-                            🛒 Purchased: Vintage Camera - $85.00
-                        </p>
-                        <p style="margin-bottom: 0.8rem; color: #7f8c8d;">
-                            📝 Listed: Antique Lamp - $45.00
-                        </p>
-                        <p style="margin-bottom: 0.8rem; color: #7f8c8d;">
-                            🛒 Purchased: Designer Handbag - $120.00
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        
+        
 
         <!-- Storefront Section -->
         <section id="storefront" class="page-section">
