@@ -1,24 +1,29 @@
 from flask import Flask, request, jsonify
-from flask_mysqldb import MySQL
-from werkzeug.security import generate_password_hash, check_password_hash
 from flask_cors import CORS
+import mysql.connector
+import bcrypt
 
-# Initialize the Flask app
+# Initialize the Flask application
 app = Flask(__name__)
+CORS(app)  # This enables Cross-Origin Resource Sharing
 
-# Enable Cross-Origin Resource Sharing (CORS) to allow the frontend to communicate with this backend
-CORS(app)
+# --- Database Configuration ---
+# IMPORTANT: Replace with your own MySQL credentials
+DB_CONFIG = {
+    'host': 'localhost',
+    'user': 'root',
+    'password': 'root',  # <-- PUT YOUR MYSQL PASSWORD HERE
+    'database': 'ecofinds'
+}
 
-# --- MySQL Configuration ---
-# Replace these with your actual MySQL database credentials
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root' # or your username
-app.config['MYSQL_PASSWORD'] = 'root' # your password
-app.config['MYSQL_DB'] = 'ecofinds'
-app.config['MYSQL_CURSORCLASS'] = 'DictCursor' # Returns results as dictionaries
-
-# Initialize MySQL
-mysql = MySQL(app)
+# Function to get a database connection
+def get_db_connection():
+    try:
+        conn = mysql.connector.connect(**DB_-CONFIG)
+        return conn
+    except mysql.connector.Error as err:
+        print(f"Database connection error: {err}")
+        return None
 
 # --- API Routes ---
 
@@ -32,23 +37,31 @@ def signup():
     if not username or not password:
         return jsonify({'error': 'Username and password are required'}), 400
 
-    cursor = mysql.connection.cursor()
-    
-    # Check if username already exists
-    cursor.execute("SELECT * FROM login WHERE username = %s", [username])
-    user = cursor.fetchone()
-    if user:
-        return jsonify({'error': 'Username already exists'}), 409 # 409 Conflict
+    # Hash the password for security
+    hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
-    # Hash the password for security before storing it
-    hashed_password = generate_password_hash(password)
-
-    # Insert the new user into the database
-    cursor.execute("INSERT INTO login (username, password_hash) VALUES (%s, %s)", (username, hashed_password))
-    mysql.connection.commit()
-    cursor.close()
+    conn = get_db_connection()
+    if not conn:
+        return jsonify({'error': 'Database connection failed'}), 500
     
-    return jsonify({'message': 'User created successfully'}), 201
+    cursor = conn.cursor()
+
+    try:
+        # Insert the new user into the 'login' table
+        cursor.execute(
+            "INSERT INTO login (username, password_hash) VALUES (%s, %s)",
+            (username, hashed_password)
+        )
+        conn.commit()
+        return jsonify({'message': 'User created successfully'}), 201
+    except mysql.connector.IntegrityError:
+        return jsonify({'error': 'Username already exists'}), 409
+    except mysql.connector.Error as err:
+        return jsonify({'error': f'An error occurred: {err}'}), 500
+    finally:
+        cursor.close()
+        conn.close()
+
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -60,22 +73,38 @@ def login():
     if not username or not password:
         return jsonify({'error': 'Username and password are required'}), 400
 
-    cursor = mysql.connection.cursor()
-    
-    # Retrieve user from database
-    cursor.execute("SELECT * FROM login WHERE username = %s", [username])
-    user = cursor.fetchone()
-    cursor.close()
+    conn = get_db_connection()
+    if not conn:
+        return jsonify({'error': 'Database connection failed'}), 500
+        
+    # dictionary=True lets us access columns by name (e.g., user['password_hash'])
+    cursor = conn.cursor(dictionary=True)
 
-    if not user or not check_password_hash(user['password_hash'], password):
-        return jsonify({'error': 'Invalid username or password'}), 401 # 401 Unauthorized
+    try:
+        # Step A: Fetch the user from the database based on the username
+        cursor.execute(
+            "SELECT id, username, password_hash FROM login WHERE username = %s",
+            (username,)
+        )
+        user = cursor.fetchone() # Get the first result
 
-    # In a real app, you would generate a token (like a JWT) here.
-    # For this example, we'll just confirm success.
-    return jsonify({'message': 'Login successful'}), 200
+        # Step B: Check if a user was found AND if the submitted password matches the stored hash
+        if user and bcrypt.checkpw(password.encode('utf-8'), user['password_hash'].encode('utf-8')):
+            # Password is correct!
+            # In a real app, you would create a session here
+            return jsonify({'message': 'Login successful'}), 200
+        else:
+            # Invalid username or password
+            return jsonify({'error': 'Invalid username or password'}), 401
+            
+    except mysql.connector.Error as err:
+        print(f"SQL Error: {err}")
+        return jsonify({'error': 'An error occurred during login'}), 500
+    finally:
+        cursor.close()
+        conn.close()
 
-# This allows the script to be run directly
+# --- Run the application ---
 if __name__ == '__main__':
-    # Use 0.0.0.0 to make the server accessible from your network
-    app.run(host='0.0.0.0', port=5000, debug=True)
-
+    # The server will run on http://127.0.0.1:5000
+    app.run(debug=True)
