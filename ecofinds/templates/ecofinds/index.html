@@ -12,21 +12,6 @@
             box-sizing: border-box;
         }
 
-<<<<<<< HEAD
-  <main class="max-w-5xl mx-auto p-4">
-    {% if messages %}
-      <div class="space-y-2 my-3">
-        {% for message in messages %}
-          <div class="p-3 rounded bg-white shadow">{{ message }}</div>
-        {% endfor %}
-      </div>
-    {% endif %}
-    {% block content %}{% endblock %}
-  </main>
-</body>
-</html>
-
-=======
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f8f9fa;
@@ -595,7 +580,7 @@
                     <span class="cart-badge" id="cart-badge">0</span>
                 </button></a>
                 <a href="purchases.html"><button class="nav-btn" onclick="showSection('purchases')">Purchases</button></a>
-                <a href="base.html"><button class="nav-btn btn-danger" onclick="logout()">Logout</button></a>
+                <a href="login.html"><button class="nav-btn btn-danger" onclick="login()">Login</button></a>
                 
             </nav>
         </div>
@@ -736,4 +721,3 @@
             </div>
         </section>
     </main>
->>>>>>> 2da1e9636f36958379b10fa618d2effb0d22562d

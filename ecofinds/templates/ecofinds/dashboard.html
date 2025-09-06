@@ -570,16 +570,18 @@
                 <h1>Treasure <span>Finds</span></h1>
             </div>
             <nav class="nav-buttons">
-                <button class="nav-btn active" onclick="showSection('dashboard')">Dashboard</button>
-                <button class="nav-btn" onclick="showSection('storefront')">Shop</button>
-                <button class="nav-btn" onclick="showSection('my-listings')">My Listings</button>
-                <button class="nav-btn" onclick="showSection('new-listing')">New Listing</button>
-                <button class="nav-btn" onclick="showSection('cart')">
+                
+                
+                <a href="shop.html"><button class="nav-btn" onclick="showSection('storefront')">Shop</button></a>
+                <a href="my_listings.html"><button class="nav-btn" onclick="showSection('my-listings')">My Listings</button></a>
+                <a href="new-listing.html"><button class="nav-btn" onclick="showSection('new-listing')">New Listing</button></a>
+                <a href="cart.html"><button class="nav-btn" onclick="showSection('cart')">
                     Cart
                     <span class="cart-badge" id="cart-badge">0</span>
-                </button>
-                <button class="nav-btn" onclick="showSection('purchases')">Purchases</button>
-                <button class="nav-btn btn-danger" onclick="logout()">Logout</button>
+                </button></a>
+                <a href="purchases.html"><button class="nav-btn" onclick="showSection('purchases')">Purchases</button></a>
+                <a href="base.html"><button class="nav-btn btn-danger" onclick="logout()">Logout</button></a>
+                
             </nav>
         </div>
     </header>
