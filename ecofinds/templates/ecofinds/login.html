@@ -1,11 +1,26 @@
-{% extends "marketplace/base.html" %}
-{% block content %}
-<div class="max-w-md mx-auto bg-white p-6 rounded shadow">
-  <h1 class="text-2xl font-bold mb-4">Login</h1>
-  <form method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <button class="mt-2 bg-green-600 text-white px-4 py-2 rounded">Login</button>
-  </form>
-  <p class="mt-3 text-sm">No account? <a class="text-green-700" href="{% url 'signup' %}">Sign up</a></p>
+<div style="width: 800px; height: 550px; position: relative; background: white; overflow: hidden">
+  <img style="width: 824.90px; height: 550px; left: -12px; top: 0px; position: absolute" src="https://placehold.co/825x550" />
+  
+  <!-- Login Card -->
+  <div style="width: 412px; height: 430px; left: 51px; top: 54px; position: absolute; background: white; border-radius: 8px; box-shadow: 0px 4px 12px rgba(0,0,0,0.2); padding: 20px;">
+    
+    <!-- Title -->
+    <div style="text-align: center; color: black; font-size: 36px; font-family: Inknut Antiqua; font-weight: 700; margin-bottom: 30px;">
+      Log In
+    </div>
+    
+    <!-- Username -->
+    <label style="font-size: 18px; font-family: Inknut Antiqua; display: block; margin-bottom: 5px;">Enter Username</label>
+    <input type="text" placeholder="Username" style="width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #ccc; margin-bottom: 20px; background: rgba(200,146,146,0.2);">
+    
+    <!-- Password -->
+    <label style="font-size: 18px; font-family: Inknut Antiqua; display: block; margin-bottom: 5px;">Enter Password</label>
+    <input type="password" placeholder="Password" style="width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #ccc; margin-bottom: 25px; background: rgba(200,146,146,0.2);">
+    
+    <!-- Buttons -->
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <a href="signup.html" style="color: #0047FF; font-family: Inknut Antiqua; text-decoration: none; font-size: 14px;">Sign Up</a>
+      <a href="base2.html" style="background: #403A3C; color: white; border: none; border-radius: 10px; padding: 10px 20px; font-family: Inknut Antiqua; cursor: pointer;">Proceed</a>
+    </div>
+  </div>
 </div>
-{% endblock %}
